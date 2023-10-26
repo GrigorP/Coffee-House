@@ -3,10 +3,12 @@ from .models import *
 
 admin.site.register(Home)
 admin.site.register(Coffee)
-admin.site.register(Popular_Items)
-admin.site.register(Todays_special)
-admin.site.register(Daily_Menu)
+admin.site.register(PopularItems)
+admin.site.register(TodaysSpecial)
+admin.site.register(DailyMenu)
 admin.site.register(Menu)
-admin.site.register(Our_menus)
+admin.site.register(OurMenus)
 admin.site.register(Category)
+admin.site.register(Text)
+admin.site.register(Contact)
 

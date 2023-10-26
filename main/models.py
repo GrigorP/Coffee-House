@@ -33,7 +33,7 @@ class Coffee(models.Model):
     def __str__(self) -> str:
         return self.name
 
-class Popular_Items(models.Model):
+class PopularItems(models.Model):
 
     coffee = models.ManyToManyField(Coffee)
 
@@ -44,8 +44,7 @@ class Popular_Items(models.Model):
         verbose_name = 'Popular_Items'
         verbose_name_plural = 'Popular_Items'
 
-class Todays_special(models.Model): 
-
+class TodaysSpecial(models.Model): 
 
     coffee = models.ManyToManyField(Coffee)
 
@@ -56,15 +55,21 @@ class Todays_special(models.Model):
         verbose_name = 'Todays_special'
         verbose_name_plural = 'Todays_special'
 
-class Daily_Menu(models.Model):
-    img = models.ImageField('IMG', upload_to='media')
+class Text(models.Model):
+    name = models.CharField('Text Name', max_length=254)
     text = models.TextField('Text')
-    about1 = models.CharField('about1', max_length=254)
-    about2 = models.CharField('about2', max_length=254)
-    about3 = models.CharField('about3', max_length=254)
-    about4 = models.CharField('about4', max_length=254)
-    about5 = models.CharField('about5', max_length=254)
-    about6 = models.CharField('about6', max_length=254)
+
+    def __str__(self) -> str:
+        return self.text
+
+    class Meta:
+        verbose_name = 'Text'
+        verbose_name_plural = 'Textes'
+
+class DailyMenu(models.Model):
+    text = models.TextField('Text')
+    about = models.ManyToManyField(Text)
+    img = models.ImageField('IMG', upload_to='media')
 
     def __str__(self) -> str:
         return 'Daily Menu'
@@ -86,7 +91,7 @@ class Menu(models.Model):
         verbose_name = 'Menu'
         verbose_name_plural = 'Menu'
 
-class Our_menus(models.Model):
+class OurMenus(models.Model):
     coffee = models.ManyToManyField(Coffee)
 
     def __str__(self) -> str:
@@ -96,8 +101,18 @@ class Our_menus(models.Model):
         verbose_name = 'Our_menus'
         verbose_name_plural = 'Our_menus'
 
+class Contact(models.Model):
+    name = models.CharField('Name', max_length=254)
+    email = models.EmailField('Email')
+    subject = models.CharField('Subject', max_length=254)
+    message = models.TextField('Message')
 
-
+    def __str__(self) -> str:
+        return self.email
+    
+    class Meta:
+        verbose_name = 'Contact'
+        verbose_name_plural = 'Contact'
 
 
 
