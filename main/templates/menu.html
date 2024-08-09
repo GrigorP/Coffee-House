@@ -36,17 +36,18 @@
           <div class="tm-position-relative margin-bottom-30">              
             <nav class="tm-side-menu">
               <ul>
-                {% for i in categories %}
-                <li>
-                  <a href="#!" class="active" data-filter=".{{i.name}}">{{ i.name }}</a>
-                </li>
+                {% for cat in categories %}
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" data-category="category" {% if category == cat %} checked {% endif %} class="custom-control-input filter-checkbox" id="{{ cat }}" name="checkbox", value="{{ cat.id }}">
+                        <label class="custom-control-label" for="{{ cat }}">{{ cat }}</label>
+                    </div>
                 {% endfor %}
               </ul>              
             </nav>    
             <img src="{% static 'img/vertical-menu-bg.png' %}" alt="Menu bg" class="tm-side-menu-bg">
           </div>  
         </div>            
-        <div class="tm-menu-product-content col-lg-9 col-md-9 {{item.category}}"  > <!-- menu content -->
+        <div class="tm-menu-product-content col-lg-9 col-md-9 {{item.category}}" id="filtered-products"> <!-- menu content -->
           {% for item in our_menus %}
             <div class="tm-product">
               <img src="{{ item.img.url }}" alt="Product">

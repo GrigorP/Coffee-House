@@ -1,14 +1,10 @@
 from django.contrib import admin
-from .models import *
+from django.apps import apps
 
-admin.site.register(Home)
-admin.site.register(Coffee)
-admin.site.register(PopularItems)
-admin.site.register(TodaysSpecial)
-admin.site.register(DailyMenu)
-admin.site.register(Menu)
-admin.site.register(OurMenus)
-admin.site.register(Category)
-admin.site.register(Text)
-admin.site.register(Contact)
+models = apps.get_models()
 
+for model in models:
+    try:
+        admin.site.register(model)
+    except admin.sites.AlreadyRegistered:
+        pass

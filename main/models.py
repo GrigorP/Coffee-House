@@ -24,7 +24,7 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 class Coffee(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     name = models.CharField('Coffee Name', max_length=254)
     about = models.TextField('About Coffee')
     price = models.PositiveIntegerField('Price')

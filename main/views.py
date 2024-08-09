@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views import generic
 from .models import *
 from .forms import ContactForm
+from django.template.loader import render_to_string
+from django.http import HttpRequest, HttpResponse, JsonResponse
 
 class HomeListView(generic.ListView):
     template_name = 'index.html'
@@ -91,3 +93,16 @@ class TodayListView(generic.ListView):
         }
 
         return render(reuquest, self.template_name, context=context)
+    
+def filter_product(request):
+
+    products = Coffee.objects.all()
+
+    categories = request.GET.getlist('category[]')
+
+
+    if len(categories) > 0:
+        products = products.filter(category__id__in = categories).distinct()
+
+    data = render_to_string("async/menu.html", {'products': products})
+    return JsonResponse({'Data': data})
